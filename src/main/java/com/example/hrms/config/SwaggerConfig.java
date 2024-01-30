@@ -25,8 +25,8 @@ public class SwaggerConfig {
     }
 
     private ApiInfo apiEndPointsInfo() {
-        return new ApiInfoBuilder().title("Address Book Job Service")
-                .description("Address Book Job Service")
+        return new ApiInfoBuilder().title("HRMS")
+                .description("Human Resources Management System")
                 .version("1.0.0")
                 .build();
     }
