@@ -27,12 +27,12 @@ public class JobManager implements JobService {
     @Override
     public DataResult<List<Job>> getAll() {
         return new SuccessDataResult<List<Job>>
-                (this.jobDao.findAll(), "Data Listed");
+                (this.jobDao.findAll(), "Jobs Listed.");
     }
 
     @Override
     public Result add(Job job) {
         this.jobDao.save(job);
-        return new SuccessResult("New Job Added");
+        return new SuccessResult("New Job Added.");
     }
 }
