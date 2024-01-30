@@ -1,0 +1,26 @@
+package com.example.hrms.business.concretes;
+
+import com.example.hrms.business.abstracts.UsersService;
+import com.example.hrms.dataAccess.abstracts.UsersDao;
+import com.example.hrms.entities.concretes.Users;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UsersManager implements UsersService {
+
+    private UsersDao usersDao;
+
+    @Autowired
+    public UsersManager(UsersDao usersDao) {
+        super();
+        this.usersDao = usersDao;
+    }
+
+    @Override
+    public List<Users> getAll() {
+        return this.usersDao.findAll();
+    }
+}
