@@ -13,9 +13,6 @@ public class Candidate {
     @Column(name = "id")
     private int id;
 
-    @Column (name="userid")
-    private int userId;
-
     @Column (name="first_name")
     private String firstName ;
 
@@ -25,9 +22,8 @@ public class Candidate {
     @Column (name="tc")
     private String tc;
 
-    public Candidate(int id, int userId, String firstName, String lastName, String tc) {
+    public Candidate(int id, String firstName, String lastName, String tc) {
         this.id = id;
-        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.tc = tc;

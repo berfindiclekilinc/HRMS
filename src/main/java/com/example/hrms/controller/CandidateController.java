@@ -32,4 +32,5 @@ public class CandidateController {
         return this.candidateService.add(candidate);
     }
 
+
 }

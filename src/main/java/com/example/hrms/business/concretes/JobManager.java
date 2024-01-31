@@ -23,7 +23,6 @@ public class JobManager implements JobService {
         this.jobDao = jobDao;
     }
 
-
     @Override
     public DataResult<List<Job>> getAll() {
         return new SuccessDataResult<List<Job>>
