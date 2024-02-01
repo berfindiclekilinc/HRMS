@@ -1,10 +1,8 @@
 package com.example.hrms.controller;
 
-
-import com.example.hrms.business.abstracts.UsersService;
+import com.example.hrms.business.abstracts.EmployerService;
 import com.example.hrms.core.utilities.results.DataResult;
-import com.example.hrms.entities.concretes.Candidate;
-import com.example.hrms.entities.concretes.Users;
+import com.example.hrms.entities.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,20 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/users")
-public class UsersController {
+@RequestMapping("/api/employer")
+public class EmployerController {
 
-    private UsersService usersService;
+    private EmployerService employerService;
 
     @Autowired
-    public UsersController(UsersService usersService) {
+    public EmployerController(EmployerService employerService) {
         super();
-        this.usersService = usersService;
+        this.employerService = employerService;
     }
 
     @GetMapping("/getall")
-    public DataResult<List<Users>> getAll(){
-        return this.usersService.getAll();
+    public DataResult<List<Employer>> getAll(){
+        return this.employerService.getAll();
     }
-
 }

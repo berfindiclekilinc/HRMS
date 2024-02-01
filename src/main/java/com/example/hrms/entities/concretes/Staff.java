@@ -1,20 +1,22 @@
 package com.example.hrms.entities.concretes;
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Table(name = "staff")
 @Entity
-public class Staff {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Staff extends Users{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "staffid")
     private int id;
-
-    @Column (name="userid")
-    private int userId;
 
     @Column (name="first_name")
     private String firstName ;
@@ -22,13 +24,7 @@ public class Staff {
     @Column (name="last_name")
     private String lastName ;
 
-    public Staff() {
-    }
-
-    public Staff(int id, int userId, String firstName, String lastName) {
-        this.id = id;
-        this.userId = userId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+    /*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    private Users user;*/
 }

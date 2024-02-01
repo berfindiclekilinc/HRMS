@@ -1,13 +1,18 @@
 package com.example.hrms.entities.concretes;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name="job")
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class Job{
 
     @Id
@@ -23,14 +28,4 @@ public class Job{
 
     @Column (name="title")
     private String title ;
-
-    public Job() {
-    }
-
-    public Job(int id, int empId, String description, String title) {
-        this.id = id;
-        this.empId = empId;
-        this.description = description;
-        this.title = title;
-    }
 }

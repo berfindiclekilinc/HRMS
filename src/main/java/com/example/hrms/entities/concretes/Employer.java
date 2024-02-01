@@ -1,20 +1,23 @@
 package com.example.hrms.entities.concretes;
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Data
 @Entity
 @Table(name = "employer")
-public class Employer {
+@AllArgsConstructor
+@NoArgsConstructor
+public class Employer extends Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-
-    @Column (name="userid")
-    private int userId;
 
     @Column (name="company_name")
     private String companyName ;
@@ -25,15 +28,8 @@ public class Employer {
     @Column (name="phone")
     private String phone;
 
-    public Employer() {
-    }
-
-    public Employer(int id, int userId, String companyName, String website, String phone) {
-        this.id = id;
-        this.userId = userId;
-        this.companyName = companyName;
-        this.website = website;
-        this.phone = phone;
-    }
+    /*@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "userid", referencedColumnName = "userid")
+    private Users user;*/
 
 }
