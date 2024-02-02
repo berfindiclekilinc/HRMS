@@ -1,8 +1,7 @@
 package com.example.hrms.business.concretes;
 
 import com.example.hrms.business.abstracts.EmployerService;
-import com.example.hrms.core.utilities.results.DataResult;
-import com.example.hrms.core.utilities.results.SuccessDataResult;
+import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.dataAccess.abstracts.EmployerDao;
 import com.example.hrms.dataAccess.abstracts.UsersDao;
 import com.example.hrms.entities.concretes.Candidate;
@@ -29,6 +28,27 @@ public class EmployerManager implements EmployerService {
     public DataResult<List<Employer>> getAll() {
         return new SuccessDataResult<List<Employer>>
                 (this.employerDao.findAll(), "Employers Listed.");
+    }
+
+    public boolean isCompanyMail(Employer employer){
+        String email = employer.getEmail();
+        String[] parts = email.split("@");
+        String domain = parts[1].toLowerCase();
+        domain = domain.substring(0, domain.length() - 4);
+
+        return (employer.getCompanyName().equalsIgnoreCase(domain));
+
+    }
+
+    public Result add(Employer employer){
+
+        if (!isCompanyMail(employer)){
+            return new ErrorResult("Email is not a company Email.");
+        }
+
+        this.employerDao.save(employer);
+        return new SuccessResult("New Employer added.");
+
     }
 
 }

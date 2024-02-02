@@ -55,7 +55,7 @@ public class CandidateManager implements CandidateService {
         }
 
         this.candidateDao.save(candidate);
-        return new SuccessResult("New Candidate Added.");
+        return new SuccessResult("New Candidate added.");
 
     }
 }
