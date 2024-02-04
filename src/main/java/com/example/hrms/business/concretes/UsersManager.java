@@ -9,7 +9,6 @@ import com.example.hrms.entities.concretes.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 @Service

@@ -34,16 +34,23 @@ public class EmployerManager implements EmployerService {
         String email = employer.getEmail();
         String[] parts = email.split("@");
         String domain = parts[1].toLowerCase();
-        domain = domain.substring(0, domain.length() - 4);
 
-        return (employer.getCompanyName().equalsIgnoreCase(domain));
-
+        return (employer.getWebsite().equalsIgnoreCase(domain));
     }
+
+    public boolean isEmailAlreadyInUse(Employer employer) {
+        return usersDao.existsByEmail(employer.getEmail());
+    }
+
 
     public Result add(Employer employer){
 
         if (!isCompanyMail(employer)){
             return new ErrorResult("Email is not a company Email.");
+        }
+
+        if (isEmailAlreadyInUse(employer)) {
+            return new ErrorResult("Email is already in use.");
         }
 
         this.employerDao.save(employer);

@@ -7,7 +7,6 @@ import com.example.hrms.dataAccess.abstracts.UsersDao;
 import com.example.hrms.entities.concretes.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -37,25 +36,49 @@ public class CandidateManager implements CandidateService {
         return candidateDao.existsByTc(candidate.getTc());
     }
 
+    private void validateCandidate(Candidate candidate) {
+        if (candidate == null) {
+            throw new IllegalArgumentException("Candidate cannot be null.");
+        }
+        if (candidate.getFirstName()=="") {
+            throw new IllegalArgumentException("First name cannot be blank or null.");
+        }
+        if (candidate.getLastName()=="") {
+            throw new IllegalArgumentException("Last name cannot be blank or null.");
+        }
+        if (candidate.getTc()=="") {
+            throw new IllegalArgumentException("TC cannot be blank or null.");
+        }
+        if (candidate.getEmail()=="") {
+            throw new IllegalArgumentException("Email cannot be blank or null.");
+        }
+        if (candidate.getPassword()=="") {
+            throw new IllegalArgumentException("Password cannot be blank or null.");
+        }
+        if (candidate.getBirthYear()==null) {
+            throw new IllegalArgumentException("Birth year cannot be blank or null.");
+        }
+    }
 
     @Override
     public Result add(Candidate candidate) {
 
-        //candidate.getUser().getEmail()==null
-        if(candidate.getEmail()==null){
-            return new ErrorResult("Email can't be empty.");
-        }
+        try {
+            validateCandidate(candidate);
 
-        if (isEmailAlreadyInUse(candidate)) {
-            return new ErrorResult("Email is already in use.");
-        }
+            if (isEmailAlreadyInUse(candidate)) {
+                return new ErrorResult("Email is already in use.");
+            }
 
-        if (isTcAlreadyInUse(candidate)) {
-            return new ErrorResult("TC number is already in use.");
-        }
+            if (isTcAlreadyInUse(candidate)) {
+                return new ErrorResult("TC number is already in use.");
+            }
 
-        this.candidateDao.save(candidate);
-        return new SuccessResult("New Candidate added.");
+            this.candidateDao.save(candidate);
+            return new SuccessResult("New Candidate added.");
+        } catch (IllegalArgumentException e) {
+            return new ErrorResult(e.getMessage());
+        }
 
     }
 }

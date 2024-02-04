@@ -24,7 +24,4 @@ public class Staff extends Users{
     @Column (name="last_name")
     private String lastName ;
 
-    /*@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userid", referencedColumnName = "userid")
-    private Users user;*/
 }

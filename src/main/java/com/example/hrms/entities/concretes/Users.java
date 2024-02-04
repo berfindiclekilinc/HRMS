@@ -1,6 +1,7 @@
 package com.example.hrms.entities.concretes;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.NotBlank;
 
@@ -21,24 +22,11 @@ public class Users {
     @Column(name = "userid")
     private int id;
 
-    @NotNull(message="Email can't be null.")
-    @NotBlank(message="Email can't be empty.")
     @Column(name = "email")
     private String email;
 
-    @NotNull(message="Password can't be null.")
-    @NotBlank(message="Password can't be empty.")
     @Column(name = "password")
     private String password;
-
-    /*@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Candidate candidate;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Employer employer;
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Staff staff;*/
 
 
 }

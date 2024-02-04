@@ -28,8 +28,4 @@ public class Employer extends Users {
     @Column (name="phone")
     private String phone;
 
-    /*@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "userid", referencedColumnName = "userid")
-    private Users user;*/
-
 }

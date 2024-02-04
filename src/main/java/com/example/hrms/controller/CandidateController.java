@@ -6,9 +6,11 @@ import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/candidate")
