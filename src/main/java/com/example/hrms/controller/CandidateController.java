@@ -33,6 +33,4 @@ public class CandidateController {
     public Result add(@RequestBody Candidate candidate){
         return this.candidateService.add(candidate);
     }
-
-
 }

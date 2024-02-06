@@ -9,15 +9,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "employer")
+@Table(name = "company")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employer extends Users {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
 
     @Column (name="company_name")
     private String companyName ;

@@ -2,24 +2,30 @@ package com.example.hrms.business.concretes;
 
 import com.example.hrms.business.abstracts.CandidateService;
 import com.example.hrms.core.utilities.results.*;
+import com.example.hrms.dataAccess.abstracts.CandidateApprovalDao;
 import com.example.hrms.dataAccess.abstracts.CandidateDao;
 import com.example.hrms.dataAccess.abstracts.UsersDao;
 import com.example.hrms.entities.concretes.Candidate;
+import com.example.hrms.entities.concretes.CandidateApproval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+
+import static com.example.hrms.business.concretes.CandidateVerificationManager.GenerateVerificationCode;
 
 @Service
 public class CandidateManager implements CandidateService {
 
     private CandidateDao candidateDao;
     private UsersDao usersDao;
+    private CandidateApprovalDao candidateApprovalDao;
 
     @Autowired
-    public CandidateManager(CandidateDao candidateDao, UsersDao usersDao){
+    public CandidateManager(CandidateDao candidateDao, UsersDao usersDao, CandidateApprovalDao candidateApprovalDao){
         super();
         this.candidateDao = candidateDao;
         this.usersDao = usersDao;
+        this.candidateApprovalDao=candidateApprovalDao;
     }
 
     @Override
@@ -36,23 +42,27 @@ public class CandidateManager implements CandidateService {
         return candidateDao.existsByTc(candidate.getTc());
     }
 
+//    public boolean isPasswordSame(Candidate candidate){
+//        return candidate.getPasswordVerify().equals(candidate.getPassword());
+//    }
+
     private void validateCandidate(Candidate candidate) {
         if (candidate == null) {
             throw new IllegalArgumentException("Candidate cannot be null.");
         }
-        if (candidate.getFirstName()=="") {
+        if (candidate.getFirstName().isEmpty()) {
             throw new IllegalArgumentException("First name cannot be blank or null.");
         }
-        if (candidate.getLastName()=="") {
+        if (candidate.getLastName().isEmpty()) {
             throw new IllegalArgumentException("Last name cannot be blank or null.");
         }
-        if (candidate.getTc()=="") {
+        if (candidate.getTc().isEmpty()) {
             throw new IllegalArgumentException("TC cannot be blank or null.");
         }
-        if (candidate.getEmail()=="") {
+        if (candidate.getEmail().isEmpty()) {
             throw new IllegalArgumentException("Email cannot be blank or null.");
         }
-        if (candidate.getPassword()=="") {
+        if (candidate.getPassword().isEmpty()) {
             throw new IllegalArgumentException("Password cannot be blank or null.");
         }
         if (candidate.getBirthYear()==null) {
@@ -74,11 +84,22 @@ public class CandidateManager implements CandidateService {
                 return new ErrorResult("TC number is already in use.");
             }
 
+//            if (!isPasswordSame(candidate)){
+//                return new ErrorResult("Passwords don't match.");
+//            }
+
             this.candidateDao.save(candidate);
+
+            CandidateApproval candidateApproval = new CandidateApproval();
+            candidateApproval.setId(candidate.getId());
+            candidateApproval.setCode(GenerateVerificationCode());
+            candidateApproval.set_verified(false);
+
+            candidateApprovalDao.save(candidateApproval);
+
             return new SuccessResult("New Candidate added.");
         } catch (IllegalArgumentException e) {
             return new ErrorResult(e.getMessage());
         }
-
     }
 }

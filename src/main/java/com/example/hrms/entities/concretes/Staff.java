@@ -13,11 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Staff extends Users{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "staffid")
-    private int id;
-
     @Column (name="first_name")
     private String firstName ;
 

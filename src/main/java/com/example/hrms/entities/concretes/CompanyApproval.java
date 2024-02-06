@@ -15,7 +15,7 @@ public class CompanyApproval {
 
     @Id
     @GeneratedValue
-    @Column(name = "emp_id")
+    @Column(name = "comp_id")
     private int id;
 
     @Column (name="code")

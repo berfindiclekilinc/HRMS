@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name="job")
-
 @AllArgsConstructor
 @NoArgsConstructor
 public class Job{
@@ -20,7 +19,7 @@ public class Job{
     @Column(name = "job_id")
     private int id;
 
-    @Column (name="emp_id")
+    @Column (name="comp_id")
     private int empId;
 
     @Column (name="description")
