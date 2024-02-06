@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "company")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employer extends Users {
+public class Company extends Users {
 
     @Column (name="company_name")
     private String companyName ;
