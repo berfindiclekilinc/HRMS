@@ -1,13 +1,10 @@
 package com.example.hrms.entities.concretes;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.NotBlank;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -28,5 +25,6 @@ public class Users {
     @Column(name = "password")
     private String password;
 
+    private String verifyPassword;
 
 }

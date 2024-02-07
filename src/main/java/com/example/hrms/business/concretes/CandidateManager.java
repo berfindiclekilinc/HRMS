@@ -9,6 +9,7 @@ import com.example.hrms.entities.concretes.Candidate;
 import com.example.hrms.entities.concretes.CandidateApproval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 import static com.example.hrms.business.concretes.CandidateVerificationManager.GenerateVerificationCode;
@@ -16,16 +17,16 @@ import static com.example.hrms.business.concretes.CandidateVerificationManager.G
 @Service
 public class CandidateManager implements CandidateService {
 
-    private CandidateDao candidateDao;
-    private UsersDao usersDao;
-    private CandidateApprovalDao candidateApprovalDao;
+    private final CandidateDao candidateDao;
+    private final UsersDao usersDao;
+    private final CandidateApprovalDao candidateApprovalDao;
 
     @Autowired
-    public CandidateManager(CandidateDao candidateDao, UsersDao usersDao, CandidateApprovalDao candidateApprovalDao){
+    public CandidateManager(CandidateDao candidateDao, UsersDao usersDao, CandidateApprovalDao candidateApprovalDao) {
         super();
         this.candidateDao = candidateDao;
         this.usersDao = usersDao;
-        this.candidateApprovalDao=candidateApprovalDao;
+        this.candidateApprovalDao = candidateApprovalDao;
     }
 
     @Override
@@ -38,7 +39,7 @@ public class CandidateManager implements CandidateService {
         return usersDao.existsByEmail(candidate.getEmail());
     }
 
-    public boolean isTcAlreadyInUse(Candidate candidate){
+    public boolean isTcAlreadyInUse(Candidate candidate) {
         return candidateDao.existsByTc(candidate.getTc());
     }
 
@@ -46,7 +47,7 @@ public class CandidateManager implements CandidateService {
 //        return candidate.getPasswordVerify().equals(candidate.getPassword());
 //    }
 
-    private void validateCandidate(Candidate candidate) {
+    private void isNotNull(Candidate candidate) {
         if (candidate == null) {
             throw new IllegalArgumentException("Candidate cannot be null.");
         }
@@ -65,37 +66,50 @@ public class CandidateManager implements CandidateService {
         if (candidate.getPassword().isEmpty()) {
             throw new IllegalArgumentException("Password cannot be blank or null.");
         }
-        if (candidate.getBirthYear()==null) {
+        if (candidate.getBirthYear() == null) {
             throw new IllegalArgumentException("Birth year cannot be blank or null.");
         }
     }
 
+    private Result isExist(Candidate candidate) {
+        if (isEmailAlreadyInUse(candidate)) {
+            return new ErrorResult("Email is already in use.");
+        }
+
+        if (isTcAlreadyInUse(candidate)) {
+            return new ErrorResult("TC number is already in use.");
+        }
+
+//        if (!isPasswordSame(candidate)){
+//            return new ErrorResult("Passwords don't match.");
+//        }
+
+        return null;
+    }
+
+    private void addVerificationCode(Candidate candidate){
+        CandidateApproval candidateApproval = new CandidateApproval();
+
+        candidateApproval.setId(candidate.getId());
+        candidateApproval.setCode(GenerateVerificationCode());
+        candidateApproval.set_verified(false);
+
+        candidateApprovalDao.save(candidateApproval);
+    }
+
     @Override
     public Result add(Candidate candidate) {
-
         try {
-            validateCandidate(candidate);
+            isNotNull(candidate);
+            isExist(candidate);
 
-            if (isEmailAlreadyInUse(candidate)) {
-                return new ErrorResult("Email is already in use.");
+            Result result = isExist(candidate);
+            if (result != null) {
+                return result;
             }
-
-            if (isTcAlreadyInUse(candidate)) {
-                return new ErrorResult("TC number is already in use.");
-            }
-
-//            if (!isPasswordSame(candidate)){
-//                return new ErrorResult("Passwords don't match.");
-//            }
 
             this.candidateDao.save(candidate);
-
-            CandidateApproval candidateApproval = new CandidateApproval();
-            candidateApproval.setId(candidate.getId());
-            candidateApproval.setCode(GenerateVerificationCode());
-            candidateApproval.set_verified(false);
-
-            candidateApprovalDao.save(candidateApproval);
+            addVerificationCode(candidate);
 
             return new SuccessResult("New Candidate added.");
         } catch (IllegalArgumentException e) {

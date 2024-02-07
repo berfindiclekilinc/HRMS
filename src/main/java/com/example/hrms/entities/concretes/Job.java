@@ -20,7 +20,7 @@ public class Job{
     private int id;
 
     @Column (name="comp_id")
-    private int empId;
+    private Integer compId;
 
     @Column (name="description")
     private String description ;
