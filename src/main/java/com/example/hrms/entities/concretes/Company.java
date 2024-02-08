@@ -2,6 +2,7 @@ package com.example.hrms.entities.concretes;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,4 +24,7 @@ public class Company extends Users {
     @Column (name="phone")
     private String phone;
 
+    @JsonIgnore
+    @Column(name = "is_mail_verified")
+    public boolean is_mail_verified;
 }

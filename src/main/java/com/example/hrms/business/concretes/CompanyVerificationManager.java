@@ -1,32 +1,31 @@
 package com.example.hrms.business.concretes;
 
-import com.example.hrms.business.abstracts.CandidateVerificationService;
+import com.example.hrms.business.abstracts.CompanyVerificationService;
 import com.example.hrms.core.utilities.results.ErrorResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessResult;
-import com.example.hrms.dataAccess.abstracts.CandidateApprovalDao;
-
-import com.example.hrms.dataAccess.abstracts.CandidateDao;
+import com.example.hrms.dataAccess.abstracts.CompanyApprovalDao;
+import com.example.hrms.dataAccess.abstracts.CompanyDao;
 import com.example.hrms.dataAccess.abstracts.UsersDao;
-import com.example.hrms.entities.concretes.Candidate;
-import com.example.hrms.entities.concretes.CandidateApproval;
+
+import com.example.hrms.entities.concretes.Company;
+import com.example.hrms.entities.concretes.CompanyApproval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 
 @Service
-public class CandidateVerificationManager implements CandidateVerificationService {
+public class CompanyVerificationManager implements CompanyVerificationService {
 
-    private CandidateApprovalDao candidateApprovalDao;
-    private CandidateDao candidateDao;
+    private CompanyApprovalDao companyApprovalDao;
+    private CompanyDao companyDao;
     private UsersDao usersDao;
 
-
     @Autowired
-    public CandidateVerificationManager(CandidateApprovalDao candidateApprovalDao, CandidateDao candidateDao, UsersDao usersDao) {
-        this.candidateApprovalDao = candidateApprovalDao;
-        this.candidateDao = candidateDao;
+    public CompanyVerificationManager(CompanyApprovalDao companyApprovalDao, CompanyDao companyDao, UsersDao usersDao) {
+        this.companyApprovalDao = companyApprovalDao;
+        this.companyDao = companyDao;
         this.usersDao = usersDao;
     }
 
@@ -44,21 +43,24 @@ public class CandidateVerificationManager implements CandidateVerificationServic
 
     @Override
     public Result verifyEmail(String email, String userCode) {
-        Candidate candidate = usersDao.getCandidateByEmail(email);
-        CandidateApproval candidateApproval = candidateApprovalDao.getCandidateApprovalById(candidate.getId());
+        Company company = usersDao.getCompanyByEmail(email);
+        CompanyApproval companyApproval = companyApprovalDao.getCompanyApprovalById(company.getId());
 
-        if (candidate.is_verified())
+        if (company.is_mail_verified())
             return new SuccessResult("Email is already verified.");
 
-        if (userCode.equals(candidateApproval.getCode())){
-            candidateApproval.set_verified(true);
-            candidate.set_verified(true);
+        if (userCode.equals(companyApproval.getCode())){
+            companyApproval.set_verified(true);
+            company.set_mail_verified(true);
 
-            candidateApprovalDao.save(candidateApproval);
-            candidateDao.save(candidate);
+            companyApprovalDao.save(companyApproval);
+            companyDao.save(company);
             return new SuccessResult("Email is verified.");
         }
 
         return new ErrorResult("Wrong verification code.");
     }
+
+
+
 }
