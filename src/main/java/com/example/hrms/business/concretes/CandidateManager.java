@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.hrms.business.concretes.CandidateVerificationManager.GenerateVerificationCode;
+import static com.example.hrms.core.utilities.GenerateCode.GenerateVerificationCode;
 
 @Service
 public class CandidateManager implements CandidateService {

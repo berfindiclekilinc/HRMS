@@ -5,8 +5,6 @@ import com.example.hrms.core.utilities.results.*;
 import com.example.hrms.dataAccess.abstracts.CompanyApprovalDao;
 import com.example.hrms.dataAccess.abstracts.CompanyDao;
 import com.example.hrms.dataAccess.abstracts.UsersDao;
-import com.example.hrms.entities.concretes.Candidate;
-import com.example.hrms.entities.concretes.CandidateApproval;
 import com.example.hrms.entities.concretes.Company;
 import com.example.hrms.entities.concretes.CompanyApproval;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.example.hrms.business.concretes.CandidateVerificationManager.GenerateVerificationCode;
+import static com.example.hrms.core.utilities.GenerateCode.GenerateVerificationCode;
 
 @Service
 public class CompanyManager implements CompanyService {
