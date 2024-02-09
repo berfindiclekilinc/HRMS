@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/jobadvertisement")
+@RequestMapping("/api/jobAdvertisement")
 public class JobAdvertisementController {
 
     private JobAdvertisementService jobAdvertisementService;
@@ -22,7 +22,7 @@ public class JobAdvertisementController {
         this.jobAdvertisementService = jobAdvertisementService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<JobAdvertisement>> getAll(){
         return this.jobAdvertisementService.getAll();
     }
@@ -31,5 +31,9 @@ public class JobAdvertisementController {
     public Result add(@RequestBody JobAdvertisement jobAdvertisement){
         return this.jobAdvertisementService.add(jobAdvertisement);
     }
+
+    @GetMapping("/getActive")
+    public DataResult<List<JobAdvertisement>> getAllActiveJobAdvertisements() {
+        return this.jobAdvertisementService.getAllActiveJobAdvertisements();}
 
 }

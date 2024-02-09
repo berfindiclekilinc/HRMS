@@ -24,7 +24,7 @@ public class CompanyController {
         this.companyVerificationService = companyVerificationService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<Company>> getAll(){
         return this.companyService.getAll();
     }
@@ -34,7 +34,7 @@ public class CompanyController {
         return this.companyService.add(company);
     }
 
-    @PostMapping("/add/verifyemail")
+    @PostMapping("/add/verifyEmail")
     public Result verifyEmail(String email, String verificationCode) {
         return this.companyVerificationService.verifyEmail(email, verificationCode);
     }

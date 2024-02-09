@@ -26,7 +26,7 @@ public class CandidateController {
         this.candidateService=candidateService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<Candidate>> getAll(){
         return this.candidateService.getAll();
     }
@@ -36,7 +36,7 @@ public class CandidateController {
         return this.candidateService.add(candidate);
     }
 
-    @PostMapping("/add/verifyemail")
+    @PostMapping("/add/verifyEmail")
     public Result verifyEmail(String email, String verificationCode) {
         return this.candidateVerificationService.verifyEmail(email, verificationCode);
     }

@@ -8,7 +8,6 @@ import com.example.hrms.dataAccess.abstracts.CompanyDao;
 import com.example.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import com.example.hrms.dataAccess.abstracts.JobDao;
 import com.example.hrms.dataAccess.abstracts.UsersDao;
-import com.example.hrms.entities.concretes.Job;
 import com.example.hrms.entities.concretes.JobAdvertisement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +35,11 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     @Override
     public DataResult<List<JobAdvertisement>> getAll() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll());
+    }
+
+    @Override
+    public DataResult<List<JobAdvertisement>> getAllActiveJobAdvertisements() {
+        return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findByStatusTrue(), "All active Jobs are listed.");
     }
 
     @Override

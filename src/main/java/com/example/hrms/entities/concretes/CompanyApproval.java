@@ -14,7 +14,6 @@ import javax.persistence.*;
 public class CompanyApproval {
 
     @Id
-    @GeneratedValue
     @Column(name = "comp_id")
     private int id;
 

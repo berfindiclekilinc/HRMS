@@ -23,7 +23,7 @@ public class StaffController {
         this.staffService = staffService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<Staff>> getAll(){
         return this.staffService.getAll();
     }

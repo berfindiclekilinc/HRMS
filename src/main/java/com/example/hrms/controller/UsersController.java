@@ -24,7 +24,7 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/getall")
+    @GetMapping("/getAll")
     public DataResult<List<Users>> getAll(){
         return this.usersService.getAll();
     }
