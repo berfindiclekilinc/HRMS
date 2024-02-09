@@ -17,9 +17,9 @@ import static com.example.hrms.business.concretes.CandidateVerificationManager.G
 @Service
 public class CandidateManager implements CandidateService {
 
-    private final CandidateDao candidateDao;
-    private final UsersDao usersDao;
-    private final CandidateApprovalDao candidateApprovalDao;
+    private CandidateDao candidateDao;
+    private UsersDao usersDao;
+    private CandidateApprovalDao candidateApprovalDao;
 
     @Autowired
     public CandidateManager(CandidateDao candidateDao, UsersDao usersDao, CandidateApprovalDao candidateApprovalDao) {

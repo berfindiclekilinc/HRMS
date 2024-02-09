@@ -27,4 +27,7 @@ public class StaffController {
     public DataResult<List<Staff>> getAll(){
         return this.staffService.getAll();
     }
+
+
+
 }

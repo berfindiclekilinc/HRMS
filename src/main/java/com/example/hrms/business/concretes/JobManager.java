@@ -26,17 +26,17 @@ public class JobManager implements JobService {
                 (this.jobDao.findAll(), "Jobs Listed.");
     }
 
-    public boolean isPositionExist(Job job) {
-        return jobDao.existsByCompIdAndTitle(job.getCompId(), job.getTitle());
-    }
-
-    private Result isExist(Job job) {
-        if (isPositionExist(job)) {
-            return new ErrorResult("Job position already exists.");
-        }
-
-        return null;
-    }
+//    public boolean isPositionExist(Job job) {
+//        return jobDao.existsByCompIdAndTitle(job.getCompId(), job.getTitle());
+//    }
+//
+//    private Result isExist(Job job) {
+//        if (isPositionExist(job)) {
+//            return new ErrorResult("Job position already exists.");
+//        }
+//
+//        return null;
+//    }
 
     private void isNotNull(Job job) {
         if (job == null) {
@@ -45,21 +45,15 @@ public class JobManager implements JobService {
         if (job.getTitle().isEmpty()) {
             throw new IllegalArgumentException("Title cannot be blank or null.");
         }
-        if (job.getDescription().isEmpty()) {
-            throw new IllegalArgumentException("Job description cannot be blank or null.");
-        }
-        if (job.getCompId() == null) {
-            throw new IllegalArgumentException("TC cannot be blank or null.");
-        }
     }
 
 
     @Override
     public Result add(Job job) {
-        Result result = isExist(job);
-        if (result != null) {
-            return result;
-        }
+//        Result result = isExist(job);
+//        if (result != null) {
+//            return result;
+//        }
 
         this.jobDao.save(job);
         return new SuccessResult("New Job Added.");

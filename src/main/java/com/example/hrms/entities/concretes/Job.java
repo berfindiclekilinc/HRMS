@@ -19,12 +19,6 @@ public class Job{
     @Column(name = "job_id")
     private int id;
 
-    @Column (name="comp_id")
-    private Integer compId;
-
-    @Column (name="description")
-    private String description ;
-
     @Column (name="title")
     private String title ;
 }

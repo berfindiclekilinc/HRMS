@@ -6,9 +6,7 @@ import com.example.hrms.business.abstracts.CandidateVerificationService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.Candidate;
-import com.example.hrms.entities.concretes.CandidateApproval;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,10 +36,8 @@ public class CandidateController {
         return this.candidateService.add(candidate);
     }
 
-    //TODO
-    @PostMapping("/add/verifymail")
-    public Result verifyEmail(String email, String verficiationCode) {
-        return this.candidateVerificationService.verifyEmail(email, verficiationCode
-        );
+    @PostMapping("/add/verifyemail")
+    public Result verifyEmail(String email, String verificationCode) {
+        return this.candidateVerificationService.verifyEmail(email, verificationCode);
     }
 }

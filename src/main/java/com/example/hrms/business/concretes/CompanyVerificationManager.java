@@ -27,6 +27,7 @@ public class CompanyVerificationManager implements CompanyVerificationService {
         this.companyApprovalDao = companyApprovalDao;
         this.companyDao = companyDao;
         this.usersDao = usersDao;
+
     }
 
     public static String GenerateVerificationCode(){
