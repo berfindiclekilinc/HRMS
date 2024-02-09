@@ -13,5 +13,9 @@ public interface JobAdvertisementService {
 
     DataResult<List<JobAdvertisement>> getAllActiveJobAdvertisements();
 
+    DataResult<List<JobAdvertisement>> findByStatusTrueOrderByApplicationStart();
+
     Result add(JobAdvertisement jobAdvertisement);
+
+    Result setStatusFalse(int jobAdvertisementId);
 }

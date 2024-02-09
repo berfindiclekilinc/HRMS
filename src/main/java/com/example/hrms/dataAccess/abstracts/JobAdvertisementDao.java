@@ -9,4 +9,8 @@ public interface JobAdvertisementDao extends JpaRepository<JobAdvertisement, Int
 
     List<JobAdvertisement> findByStatusTrue();
 
+    List<JobAdvertisement> findByStatusTrueOrderByApplicationStart();
+
+    JobAdvertisement findJobAdvertisementById(int id);
+
 }

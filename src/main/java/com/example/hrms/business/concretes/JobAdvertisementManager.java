@@ -4,6 +4,7 @@ import com.example.hrms.business.abstracts.JobAdvertisementService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.core.utilities.results.SuccessDataResult;
+import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.CompanyDao;
 import com.example.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import com.example.hrms.dataAccess.abstracts.JobDao;
@@ -31,7 +32,6 @@ public class JobAdvertisementManager implements JobAdvertisementService {
         this.jobDao = jobDao;
     }
 
-
     @Override
     public DataResult<List<JobAdvertisement>> getAll() {
         return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll());
@@ -43,8 +43,27 @@ public class JobAdvertisementManager implements JobAdvertisementService {
     }
 
     @Override
+    public DataResult<List<JobAdvertisement>> findByStatusTrueOrderByApplicationStart() {
+        var result = jobAdvertisementDao.findByStatusTrueOrderByApplicationStart();
+        return new SuccessDataResult<List<JobAdvertisement>>(result, "All jobs are listed.");
+    }
+
+    @Override
     public Result add(JobAdvertisement jobAdvertisement) {
         this.jobAdvertisementDao.save(jobAdvertisement);
-        return null;
+        return new SuccessResult("New Job added.");
     }
+
+    @Override
+    public Result setStatusFalse(int jobAdvertisementId){
+        JobAdvertisement jobAdvertisement = jobAdvertisementDao.findJobAdvertisementById(jobAdvertisementId);
+        jobAdvertisement.setStatus(false);
+
+        jobAdvertisementDao.save(jobAdvertisement);
+
+        return new SuccessResult("Job advertisement status changed to false.");
+    }
+
+
+
 }
