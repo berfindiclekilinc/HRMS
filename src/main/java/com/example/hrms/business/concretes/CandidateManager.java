@@ -7,6 +7,7 @@ import com.example.hrms.dataAccess.abstracts.CandidateDao;
 import com.example.hrms.dataAccess.abstracts.UsersDao;
 import com.example.hrms.entities.concretes.Candidate;
 import com.example.hrms.entities.concretes.CandidateApproval;
+import com.example.hrms.entities.dtos.CandidateResumeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -115,5 +116,11 @@ public class CandidateManager implements CandidateService {
         } catch (IllegalArgumentException e) {
             return new ErrorResult(e.getMessage());
         }
+    }
+
+    @Override
+    public DataResult<List<CandidateResumeDto>> getCandidateCv(){
+        return new SuccessDataResult<List<CandidateResumeDto>>
+                (this.candidateDao.getCandidateFullCv(), "Candidates Cv is listed.");
     }
 }

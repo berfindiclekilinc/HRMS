@@ -20,7 +20,7 @@ public class Skill {
     private int Id;
 
     @Column(name = "technology")
-    private String technology;
+    private String knownTechnology;
 
     @ManyToOne
     @JoinColumn(name = "candidate_id")

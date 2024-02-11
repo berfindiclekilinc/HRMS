@@ -6,6 +6,7 @@ import com.example.hrms.business.abstracts.CandidateVerificationService;
 import com.example.hrms.core.utilities.results.DataResult;
 import com.example.hrms.core.utilities.results.Result;
 import com.example.hrms.entities.concretes.Candidate;
+import com.example.hrms.entities.dtos.CandidateResumeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,11 @@ public class CandidateController {
         return this.candidateService.getAll();
     }
 
+    @GetMapping("/getCV")
+    public DataResult<List<CandidateResumeDto>> getCandidateFullCv() {
+        return this.candidateService.getCandidateCv();
+    }
+
     @PostMapping("/add")
     public Result add(@RequestBody Candidate candidate){
         return this.candidateService.add(candidate);
@@ -40,4 +46,7 @@ public class CandidateController {
     public Result verifyEmail(String email, String verificationCode) {
         return this.candidateVerificationService.verifyEmail(email, verificationCode);
     }
+
+
+
 }

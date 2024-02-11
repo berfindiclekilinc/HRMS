@@ -27,10 +27,10 @@ public class Experience {
     private String position;
 
     @Column(name = "start_year")
-    private String startYear;
+    private String jobStartYear;
 
     @Column(name = "end_year")
-    private String endYear;
+    private String jobEndYear;
 
     @ManyToOne
     @JoinColumn(name = "candidate_id")
