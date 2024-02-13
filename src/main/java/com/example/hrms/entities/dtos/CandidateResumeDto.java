@@ -27,5 +27,4 @@ public class CandidateResumeDto {
     public String github;
     public String coverLetter;
 
-
 }

@@ -11,7 +11,7 @@ public interface UsersDao extends JpaRepository<Users,Integer> {
 
     boolean existsByEmail(String email);
 
-    Candidate getCandidateByEmail(String email); //Users getby email??
+    Candidate getCandidateByEmail(String email);
 
     Company getCompanyByEmail(String email);
 }

@@ -2,6 +2,7 @@ package com.example.hrms.business.concretes.cvConcretes;
 
 import com.example.hrms.business.abstracts.cvAbstracts.WebAddressService;
 import com.example.hrms.core.utilities.results.Result;
+import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.cvDao.WebAddressDao;
 import com.example.hrms.entities.concretes.candidateResume.WebAddress;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class WebAddressManager implements WebAddressService {
 
     @Override
     public Result add(WebAddress webAddress) {
-        return null;
+        this.webAddressDao.save(webAddress);
+        return new SuccessResult("Web Address added.");
     }
 }

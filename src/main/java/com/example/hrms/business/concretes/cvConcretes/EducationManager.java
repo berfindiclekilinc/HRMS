@@ -2,6 +2,7 @@ package com.example.hrms.business.concretes.cvConcretes;
 
 import com.example.hrms.business.abstracts.cvAbstracts.EducationService;
 import com.example.hrms.core.utilities.results.Result;
+import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.cvDao.EducationDao;
 import com.example.hrms.entities.concretes.candidateResume.Education;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class EducationManager implements EducationService {
 
     @Override
     public Result add(Education education) {
-        return null;
+        this.educationDao.save(education);
+        return new SuccessResult("Education info added.");
     }
 }

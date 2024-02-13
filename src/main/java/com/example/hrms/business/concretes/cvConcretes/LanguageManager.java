@@ -2,6 +2,7 @@ package com.example.hrms.business.concretes.cvConcretes;
 
 import com.example.hrms.business.abstracts.cvAbstracts.LanguageService;
 import com.example.hrms.core.utilities.results.Result;
+import com.example.hrms.core.utilities.results.SuccessResult;
 import com.example.hrms.dataAccess.abstracts.cvDao.LanguageDao;
 import com.example.hrms.entities.concretes.candidateResume.Language;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class LanguageManager implements LanguageService {
 
     @Override
     public Result add(Language language) {
-        return null;
+        this.languageDao.save(language);
+        return new SuccessResult("Language added.");
     }
 }

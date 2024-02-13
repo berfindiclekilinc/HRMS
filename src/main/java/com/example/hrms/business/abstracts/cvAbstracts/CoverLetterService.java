@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface CoverLetterService {
 
+    Result addByMail(String email, String password, CoverLetter coverLetter);
+
     Result add(CoverLetter coverLetter);
 }

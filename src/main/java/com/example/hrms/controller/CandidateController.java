@@ -47,6 +47,4 @@ public class CandidateController {
         return this.candidateVerificationService.verifyEmail(email, verificationCode);
     }
 
-
-
 }

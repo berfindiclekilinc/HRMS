@@ -1,6 +1,7 @@
 package com.example.hrms.entities.concretes.candidateResume;
 
 import com.example.hrms.entities.concretes.Candidate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class Education {
     @Column(name = "end_year")
     private String endYear;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "candidate_id")
     private Candidate candidate;

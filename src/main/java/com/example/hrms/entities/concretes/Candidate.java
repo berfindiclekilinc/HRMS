@@ -2,6 +2,7 @@ package com.example.hrms.entities.concretes;
 
 import com.example.hrms.entities.concretes.candidateResume.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @Table(name = "candidate")
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisments"})
 public class Candidate extends Users  {
 
     @Column(name = "first_name")
@@ -34,23 +36,29 @@ public class Candidate extends Users  {
     private boolean is_verified;
 
 
-    @OneToOne(mappedBy = "candidate")
+    /////
+    @JsonIgnore
+    @OneToOne(mappedBy = "candidate", cascade = CascadeType.ALL)
     private CoverLetter candidateCoverLetter;
 
-    @OneToOne(mappedBy = "candidate")
+    @JsonIgnore
+    @OneToOne(mappedBy = "candidate", cascade = CascadeType.ALL)
     private WebAddress candidateWebAddress;
 
-
-    @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Experience> candidateExperience;
 
-    @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Language> candidateLanguage;
 
-    @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Education> candidateEducation;
 
-    @OneToMany(mappedBy = "candidate")
+    @JsonIgnore
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
     private List<Skill> candidateSkill;
 
 }

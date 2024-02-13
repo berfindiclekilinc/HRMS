@@ -44,9 +44,9 @@ public class CandidateManager implements CandidateService {
         return candidateDao.existsByTc(candidate.getTc());
     }
 
-//    public boolean isPasswordSame(Candidate candidate){
-//        return candidate.getPasswordVerify().equals(candidate.getPassword());
-//    }
+    public boolean isPasswordSame(Candidate candidate){
+        return candidate.getVerifyPassword().equals(candidate.getPassword());
+    }
 
     private void isNotNull(Candidate candidate) {
         if (candidate == null) {
@@ -81,9 +81,9 @@ public class CandidateManager implements CandidateService {
             return new ErrorResult("TC number is already in use.");
         }
 
-//        if (!isPasswordSame(candidate)){
-//            return new ErrorResult("Passwords don't match.");
-//        }
+        if (!isPasswordSame(candidate)){
+            return new ErrorResult("Passwords don't match.");
+        }
 
         return null;
     }
