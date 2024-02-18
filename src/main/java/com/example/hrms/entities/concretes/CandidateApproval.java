@@ -1,15 +1,20 @@
 package com.example.hrms.entities.concretes;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Data
 @Table(name = "candidate_approval")
 @Entity
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class CandidateApproval {
 
     @Id
-    @GeneratedValue
     @Column(name = "candidate_id")
     private int id;
 
@@ -19,12 +24,4 @@ public class CandidateApproval {
     @Column (name="is_verified")
     private boolean is_verified ;
 
-    public CandidateApproval() {
-    }
-
-    public CandidateApproval(int id, String code, boolean is_verified) {
-        this.id = id;
-        this.code = code;
-        this.is_verified = is_verified;
-    }
 }

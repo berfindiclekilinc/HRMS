@@ -2,6 +2,8 @@ package com.example.hrms.controller;
 
 
 import com.example.hrms.business.abstracts.UsersService;
+import com.example.hrms.core.utilities.results.DataResult;
+import com.example.hrms.entities.concretes.Candidate;
 import com.example.hrms.entities.concretes.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +24,9 @@ public class UsersController {
         this.usersService = usersService;
     }
 
-    @GetMapping("/getall")
-    public List<Users> getAll(){
+    @GetMapping("/getAll")
+    public DataResult<List<Users>> getAll(){
         return this.usersService.getAll();
     }
+
 }
